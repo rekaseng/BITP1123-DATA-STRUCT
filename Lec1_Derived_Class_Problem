@@ -1,0 +1,91 @@
+//Account.h
+
+#pragma once
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+
+class Account {
+protected:
+	int accNum;
+	char name;
+public:
+	Account();
+	void openAcc(const int, const char*);
+	void printAcc()const;
+};
+#endif
+
+//Account.cpp
+#include<iostream>
+#include <cstring>
+#include "Account.h"
+using namespace std;
+Account::Account() {
+	accNum = 0;
+	strcpy(name, "");
+}
+
+void Account::openAcc(const int num, const char* pname) {
+	accNum = num;
+	strcpy(name, pname);
+}
+
+void Account::printAcc()const {
+	cout << "Account number: " << accNum << endl;
+	cout << "Account name: " << name << endl;
+}
+
+
+//Current.h
+#pragma once
+#ifndef CURRENT_H
+#define CURRENT_H
+class Current:public Account {  //problematic area
+private:
+	double balance;
+public:
+	Current();
+	void deposit(const double);
+	void printBalance() ;
+
+};
+#endif // !CURRENT_H
+
+
+//Current.cpp
+#include <iostream>
+#include "Account.h"
+#include "Current.h"
+using namespace std;
+Current::Current(){
+	balance = 0.0;
+}
+void Current::deposit(const double bal) {
+	balance += bal;
+}
+void Current::printBalance() {
+	cout << "From currrent account: " << endl;
+	cout << "Current Account number: " << accNum << endl;
+	cout << "Name: " << name << endl;
+	cout << "Balance Account: " << balance << endl;
+}
+
+//Main.cpp
+#include <iostream>
+#include <cstring>
+#include "Account.h"
+#include "Current.h"
+using namespace std;
+
+int main() {
+	Account acc;
+	acc.openAcc(111, "Milah");
+	acc.printAcc();
+	acc.deposit(1000.00);
+	acc.printBalance();
+	acc.deposit(50.00);
+	acc.printBalance();
+	return 0;
+
+
+}
