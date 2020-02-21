@@ -1,0 +1,48 @@
+//Average.h
+#pragma once
+#ifndef AVERAGE_H
+#define AVERAGE_H
+
+class Average {
+private:
+	int a, b;
+	double c, d, e;
+public:
+	Average();
+	~Average();
+	void calculate(int, int);
+	void calculate(double, double, double);
+};
+#endif // !AVERAGE_H
+
+//Average.cpp
+#include <iostream>
+#include "Average.h"
+using namespace std;
+Average::Average() {}
+Average::~Average() {}
+void Average::calculate(int one, int two)
+{
+	a = one;
+	b = two;
+	cout << "Average integer = " << (a + b) / 2 << endl;
+}
+
+void Average::calculate(double three, double four, double five)
+{
+	c = three;
+	d = four;
+	e = five;
+	cout << "Average double = " << (c + d+e) / 3 << endl;
+}
+
+//Main.cpp
+#include <iostream>
+#include "Average.h"
+using namespace std;
+
+void main() {
+	Average ave, avei;
+	ave.calculate(4, 4);
+	avei.calculate(3.4, 3.4, 3.4);
+}
