@@ -1,0 +1,77 @@
+//Mammal.h
+#pragma once
+#ifndef MAMMAL_H
+#define MAMMAL_H
+class Mammal {
+protected:
+	int age;
+	double weight;
+public:
+	Mammal();
+	~Mammal();
+	void setageWeight(int, double);
+	void sleep(); //original method
+	void eat();
+};
+#endif
+
+
+//Mammal.cpp
+#include <iostream>
+#include "Mammal.h"
+using namespace std;
+Mammal::Mammal() {}
+Mammal::~Mammal() {}
+void Mammal::setageWeight(int agey, double weighty)
+{
+	age = agey;
+	weight = weighty;
+}
+void Mammal::sleep() {
+	cout << "At the age of " << age << " years old, I like to sleep" << endl;
+	cout << "Shhhhh" << endl;
+}
+void Mammal::eat() {
+	cout << "I eat until my weight reach " << weight << endl;
+}
+
+//Cat.h
+#pragma once
+#ifndef CAT_H
+#define CAT_H
+
+class Cat:public Mammal {   //problematic area
+public:
+	Cat();
+	~Cat();
+	void sleep(); //override method
+};
+#endif
+
+//Cat.cpp
+#include <iostream>
+#include "Cat.h"
+#include "Mammal.h"
+using namespace std;
+Cat::Cat(){}
+Cat::~Cat() {}
+void Cat::sleep() {
+	cout << "I have slept all the year until I am " << age << " years old" << endl;
+	cout << "My favourite hobby is sleeping" << endl;
+}
+
+//Main.cpp
+#include <iostream>
+#include "Cat.h"
+#include "Mammal.h"
+using namespace std;
+void main() {
+	Mammal Dino;
+	Cat Siti;
+	cout << "The original method" << endl;
+	Dino.setageWeight(45, 65.3);
+	cout << "The override method" << endl;
+	Siti.setageWeight(65, 85.9);
+	Dino.sleep();
+	Siti.sleep();
+}
