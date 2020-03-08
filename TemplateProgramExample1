@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+template <class T>
+void Change(T x, T y)
+{
+	cout << "Before change: first value: " << x
+		<< "\n\t\tsecond value: " << y << endl << endl;
+	T a;
+	a = x;
+	x = y;
+	y = a;
+	cout << "After change: first value: " << x
+		<< "\n\t\tsecond value: " << y << endl << endl;
+}
+void main()
+{
+	Change('s', 'k');
+	Change(90, 2);
+	getchar();
+}
