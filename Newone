@@ -1,0 +1,146 @@
+ #include <iostream>
+using namespace std;
+#include <string>
+
+template <class Datatype>
+class List
+{
+	private:
+	class Node
+{
+	public: 
+	Datatype data;
+	Node* link;
+	};
+	Node *pHead;
+	Node *pCurr;
+	int numItem;
+	
+	public:
+	List();
+	~List();
+	void AddtoFront();
+	bool Traverse(Datatype);
+	void AddtoMiddle ();
+	void printData();
+	int NumberOfItem();
+	};
+	
+template <class Datatype>
+List<Datatype>::List()
+{
+	numItem=0;
+	pHead=0;
+	}
+	
+	
+template <class Datatype>
+List<Datatype>::~List(){}
+
+	
+template <class Datatype>
+void List<Datatype>::AddtoFront()
+{
+	Datatype item;
+	Node *pNew =new Node;
+	cout<<"Enter data: ";
+	cin>>item;
+	pNew->data =item;
+	if (pHead==0)
+	{
+	pNew->link=pHead;
+	pHead = pNew;
+	pCurr=pNew;
+	numItem++;
+	}else
+	{
+		pCurr->link =pNew;
+		pCurr =pNew;
+		numItem++;	
+	}
+	}
+	
+	
+template <class Datatype>
+void List<Datatype>::printData()
+{
+	pCurr =pHead;
+	while (pCurr !=0)
+	{
+		cout<<pCurr->data<<" ";
+		pCurr=pCurr->link;
+	}
+	cout<<endl;
+	}
+	
+	
+template <class Datatype>
+int List<Datatype>::NumberOfItem()
+{
+	return numItem;
+	}
+	
+template <class Datatype>
+void List<Datatype>::AddtoMiddle()
+{
+	Datatype item;
+	Node *pNewalso = new Node;
+	cout<<"Enter data: ";
+	cin>>item;
+	pNewalso->data = item;
+	pNewalso->link = pCurr->link;
+	pCurr->link =pNewalso;
+	numItem++;
+	}
+	
+	
+template <class Datatype>
+bool List<Datatype>::Traverse(Datatype target)
+{
+	if (numItem==0)
+	cout<<"There is no item in the list"<<endl;
+	else
+	{
+		pCurr = pHead;
+		while (pCurr->data != target && pCurr->link !=0)
+	{
+		pCurr= pCurr->link;
+	}
+	if (pCurr->data ==target)
+	{
+	AddtoMiddle();
+	return true;
+	}
+	else
+	return false;
+	}
+}
+
+int main()
+{
+char target;
+List<char> x;
+for (int i=1; i<4; i++)
+{
+	x.AddtoFront();
+}
+cout<<"Number of items in the list are : "<<x.NumberOfItem()<<endl;
+cout<<"The list are  :" <<endl;
+x.printData();
+cout<<endl;
+cout<<"Add after item : ";
+cin>>target;
+
+if (x.Traverse(target)==true)
+{
+	cout<<"The new list are : "<<endl;
+	x.printData();
+}
+else
+cout<<"Item is not found. Couldn't item to the list ."<<endl;
+
+return 0;
+}
+
+
+
